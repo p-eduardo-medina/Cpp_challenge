@@ -1,0 +1,2 @@
+cd C:/Users/"Eduardo Medina"/Documents/Programming/Cpp/
+g++ programa.cpp -o programa.exe
