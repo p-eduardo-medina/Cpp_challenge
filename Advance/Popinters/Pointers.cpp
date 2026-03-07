@@ -25,8 +25,14 @@ int main() {
 
     // Dynamic allocation
     int *dyn = new int(100);
+    int *p_num1{new int( 100 ) }; // dynamically allocated int initialized to 100 using direct initialization
+    int *p_num2{new int{ 200 } }; // dynamically allocated int initialized to 200 using uniform initialization
     std::cout << "Dynamically allocated int: " << *dyn << "\n";
+    std::cout << "Dynamically allocated int (direct initialization): " << *p_num1 << "\n";
+    std::cout << "Dynamically allocated int (uniform initialization): " << *p_num2 << "\n";
     delete dyn;    // free memory
+    delete p_num1;
+    delete p_num2;
 
     // Unique pointer (smart pointer)
     std::unique_ptr<int> uptr = std::make_unique<int>(55);
@@ -62,6 +68,58 @@ int main() {
     std::cout << "message: " << message << "\n"; // arrays of characters are stored in modifiable memory, so we can modify the contents of message
     message[0] = 'h'; // This is valid since message is an array, not a pointer to a string literal
     std::cout << "After modifying message: " << message << "\n";
+
+    //dangling pointer example
+    int *danglingPtr {new int {17}}; // dynamically allocated int
+    std::cout << "danglingPtr points to Before delete: " << danglingPtr << "\n";
+    delete danglingPtr;
+    std::cout << "danglingPtr points to After delete: " << danglingPtr << "\n";
+
+    //Dynamic array allocation
+    int size = 5;
+    int *dynamicArray = new int[size]; // dynamically allocated array of integers
+    for (int i = 0; i < size; ++i) {
+        dynamicArray[i] = (i + 1) * 10; // initialize array elements
+    }
+    std::cout << "Dynamic array elements: ";
+    for (int i = 0; i < size; ++i) {
+        std::cout << dynamicArray[i] << " ";
+    }
+    std::cout << "\n";  
+
+    int size_t {10};
+    double *p_salaries { new double[size_t] }; // dynamically allocated array of doubles, will contain garbage values since it is not initialized
+    int * p_student {new (std::nothrow) int [size_t]{}}; // dynamically allocated array of integers initialized to zero using nothrow and uniform initialization
+    double *p_scores { new(std::nothrow) double[size_t]{1,2,3,4,5} }; // dynamically allocated array of doubles initialized to zero using nothrow and uniform initialization
+
+    if(p_scores) { //nullptr check to ensure memory allocation was successful
+        std::cout << "p_scores: "<< std::endl;
+        for (int i = 0; i < size_t; ++i) {
+            std::cout << "value: " << p_scores[i] << " & " << *(p_scores+i)<< std::endl; // print values in p_scores array
+        };
+    } else {
+        std::cout << "Memory allocation for p_scores failed\n";
+    }
+    delete[] dynamicArray; // free memory allocated for dynamic array
+    delete[] p_salaries; // free memory allocated for p_salaries array
+    delete[] p_scores; // free memory allocated for p_scores array
+
+    double *temperatures = new double[size_t] {10.0,20.0,30.0,40.0,50.0,60.0,70.0,80.0,90.0,100.0}; // dynamically allocated array of doubles with 10 elements, initialized using nothrow and uniform initialization
+    for(int i = 0; i < size_t; ++i) { // index-based for loop to print values in temperature array
+        std::cout << "Temperature: " << temperatures[i] << " & " << *(temperatures+i) << std::endl;
+    }
+    delete[] temperatures; // free memory allocated for temperatures array
+
+    //static array vs dynamic array
+    int staticArray[5] = {1, 2, 3, 4, 5}; // static array of integers
+    int *dynamicArray2 = new int[5] {1, 2, 3, 4, 5}; // dynamically allocated array of integers initialized using uniform initialization
+    for( auto s: staticArray) { // range-based for loop to print values in static array
+        std::cout << "Static array value: " << s << std::endl;
+    }
+    for(int i = 0; i < 5; ++i) { // index-based for loop to print values in dynamic array
+        std::cout << "Dynamic array value: " << dynamicArray2[i] << " & " << *(dynamicArray2+i) << std::endl;
+    }
+    delete[] dynamicArray2; // free memory allocated for dynamic array
 
     return 0;
 }
