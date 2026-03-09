@@ -119,7 +119,13 @@ int main() {
     for(int i = 0; i < 5; ++i) { // index-based for loop to print values in dynamic array
         std::cout << "Dynamic array value: " << dynamicArray2[i] << " & " << *(dynamicArray2+i) << std::endl;
     }
+
     delete[] dynamicArray2; // free memory allocated for dynamic array
+
+    // Pointer to pointer
+    int **ptrToPtr = &ptrValue; // pointer to pointer, holds address of ptrValue
+    std::cout << "ptrToPtr points to: " << ptrToPtr << "\n";
+    std::cout << "ptrToPtr points to value: " << **ptrToPtr << "\n";    
 
     return 0;
 }
