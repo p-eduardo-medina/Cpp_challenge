@@ -48,7 +48,11 @@ int main() {
         std::cout << output + 1 << "\n"; // print the substring after the last '/', which should be the file name "input.txt"
     }
     
-    
+    //C-STRING cCONCATENAATION & COPY
+    char str1[20] {"Hello, "}; // array of characters initialized to "Hello, ", with enough space for concatenation
+    char str2[] {"World!"}; // array of characters initialized to "World!"
+    std::strcat(str1, str2); // concatenate str2 to str1, which modifies str1 to contain "Hello, World!"
+    std::cout << "Concatenated string: " << str1 << "\n";
     
     return 0;
 
