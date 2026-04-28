@@ -36,7 +36,7 @@ class MexicanChef : public Chef { // Inheritance: MexicanChef is a subclass of C
 
 int main() {
     Chef chef;
-    cout << "Chef's dishes:" << endl;
+    cout << "Chef's dishes -->  " << endl;
     chef.makeChicken();
     chef.makeSalad();
     chef.makeSpecialDish();

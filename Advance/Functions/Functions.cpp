@@ -26,6 +26,8 @@ int main(int argc, char const *argv[])
     std::cout << "The maximum of 10 and 20 is: " << new_max_val << "\n\t\t\t:D" <<std::endl;
     std::cout << "The minimum of 10 and 20 is: " << new_min_val << "\n\t\t\t:D" <<std::endl;
 
+    std::cout << "The result of incr_mult(2, 3) is: " << incr_mult(4, 6) << "\n\t\t\t:D" <<std::endl;
+
     return 0;
 }
 
