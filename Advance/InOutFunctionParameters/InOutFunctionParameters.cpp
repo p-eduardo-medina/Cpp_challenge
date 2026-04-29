@@ -21,7 +21,22 @@ void max_double(double input1, double input2, double* output){
     }else{
         *output = input2;
     }
+
+//Overloading functions
 }
+int max(int a, int b){
+    std::cout << "int overload called!" << std::endl;
+    return (a > b) ? a : b; // Ternary operator, returns a if a is greater than b, otherwise returns b
+}
+double max(double a, double b){
+    std::cout << "double overload called!" << std::endl;
+    return (a > b) ? a : b;
+}
+double max(double a, int b){
+    std::cout << "double and int overload called!" << std::endl;
+    return (a > b) ? a : b;
+}
+
 
 int main() {
     
@@ -42,6 +57,20 @@ int main() {
     double in_double2{20.71};
     max_double(in_double1, in_double2, &out_double);
     std::cout << "The larger double is: " << out_double << "\n\n" << std::endl;
+
+    int x{4};
+    int y{5};
+    double a{4.5};
+    double b{7.951};
+
+    auto result = max(x, y); // Calls the int overload
+    std::cout << "The larger integer is: " << result << "\n\n" << std::endl;
+
+    auto result2 = max(a, b); // Calls the double overload
+    std::cout << "The larger double is: " << result2 << "\n\n" << std::endl;    
+
+    auto result3 = max(a, 120); // Calls the double and int overload
+    std::cout << "The larger value is: " << result3 << "\n\n" << std::endl;
 
     return 0;
 
