@@ -1,4 +1,0 @@
-﻿  Middle cpp Projects.cpp
-C:\Users\Eduardo Medina\Documents\Programming\Cpp\ChallengeforCpp\Middle cpp Projects\Middle cpp Projects\Middle cpp Projects.cpp(17,14): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
-C:\Users\Eduardo Medina\Documents\Programming\Cpp\ChallengeforCpp\Middle cpp Projects\Middle cpp Projects\Middle cpp Projects.cpp(20,17): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
-  Middle cpp Projects.vcxproj -> C:\Users\Eduardo Medina\Documents\Programming\Cpp\ChallengeforCpp\Middle cpp Projects\x64\Debug\Middle cpp Projects.exe
