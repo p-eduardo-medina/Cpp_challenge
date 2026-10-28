@@ -116,6 +116,40 @@ std::vector<std::string> makeBox(int n) {
 }
 
 
+bool firstBeforeSecond(std::string str, std::string first, std::string second) {
+	std::vector<int> arrFirst = {}, arrSecond = {};
+	for (int index = 0; index < str.size(); index++) {
+		if (str[index] == first[0]) {
+			arrFirst.push_back(index);
+		}
+		else if (str[index] == second[0]) {
+			arrSecond.push_back(index);
+		}
+	}
+	for (int index2 : arrSecond) {
+		for (int index1 : arrFirst) {
+			if (index1 > index2) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+bool firstBeforeSecond2(std::string str, char first, char second) {
+	return str.substr(str.find(second), str.size()).find(first) == std::string::npos;
+}
+
+
+std::string mysteryFunc(std::string s) {
+	std::string output = "";
+	for (int index = 0; index < s.size(); index += 2) {
+		std::string result( s[index+1] - '0', s[index]);
+		output += result;
+	}
+	return output;
+}
+
 int main()
 {
 	//	tweakLetters("apple", { 0, 1, -1, 0, -1 });
@@ -124,6 +158,10 @@ int main()
 	//  cons({ 5, 1, 4, 3, 2 });
 	//  isDisarium(135);
 	//  findOdd({ 1, 1, 2, -2, 5, 2, 4, 4, -1, -2, 5 });
-	makeBox(5);
+	//  makeBox(5);
+	//  cout << std::string::npos << endl;
+	//	firstBeforeSecond("a rabbit jumps joyfully", "a", "j");
+	mysteryFunc("A4B5C2");
+
 	return 0;
 }
