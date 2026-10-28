@@ -1,5 +1,5 @@
 // Middle cpp Projects.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
+// HardChallengeOctober.cpp
 
 #include <algorithm>
 #include <cmath>
@@ -80,14 +80,40 @@ bool cons(std::vector<int> arr) {
 bool isDisarium(int number) {
 	std::string charNum = std::to_string(number);
 	int sum{ 0 };
-	for (int index = 0; index < charNum.length() ; index++) {
+	for (int index = 0; index < charNum.length(); index++) {
 		int num = charNum[index] - '0';
-		sum += pow(num, index+1);
+		sum += pow(num, index + 1);
 	}
 	if (sum == number) { return true; }
 	return false;
 }
 
+int findOdd(vector<int> arr) {
+	for (int num : arr) {
+		int total_occurrences = std::count(arr.begin(), arr.end(), num);
+		if (total_occurrences % 2 == 1) {
+			return num;
+		}
+	}
+}
+
+std::vector<std::string> makeBox(int n) {
+	std::vector<std::string> output = {};
+	for (int i = 0; i < n; i++) {
+		std::string row = "";
+		for (int j = 0; j < n; j++) {
+			if (i == 0 || j == 0 || i == n - 1 || j == n-1) { 
+				row += "#"; 
+			}
+			else {
+				row += " ";
+			}
+
+		}
+		output.push_back(row);
+	}
+	return output;
+}
 
 
 int main()
@@ -95,10 +121,9 @@ int main()
 	//	tweakLetters("apple", { 0, 1, -1, 0, -1 });
 	//	circularShift({1, 2, 3, 4}, {3, 4, 1, 2}, 2);
 	//	quicksort({5, 2, 8, 1, 9});
-	//cons({ 5, 1, 4, 3, 2 });
-	isDisarium(75);
-	isDisarium(135);
-
-
+	//  cons({ 5, 1, 4, 3, 2 });
+	//  isDisarium(135);
+	//  findOdd({ 1, 1, 2, -2, 5, 2, 4, 4, -1, -2, 5 });
+	makeBox(5);
 	return 0;
 }
