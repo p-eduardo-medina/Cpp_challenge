@@ -1,11 +1,12 @@
 // Middle cpp Projects.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
 //
 
-#include <iostream>
+#include <algorithm>
 #include <cmath>
 #include <iomanip>
+#include <iostream>
+#include <string> 
 #include <vector>
-#include <algorithm>
 
 double cubeDiagonal(double volume) {
 	double diagonal = pow(volume, 1.0 / 3.0) * sqrt(3);
@@ -25,12 +26,12 @@ std::string tweakLetters(std::string s, std::vector<int> arr) {
 
 using namespace std;
 bool circularShift(vector<int> arr1, vector<int> arr2, int n) {
-//	bool allShifted = std::all_of(arr1.begin(), arr1.end()-1, [&](int x) {
-//		return arr1[(x+n) % arr1.size()] == arr2[x];
-//		});
+	//	bool allShifted = std::all_of(arr1.begin(), arr1.end()-1, [&](int x) {
+	//		return arr1[(x+n) % arr1.size()] == arr2[x];
+	//		});
 	bool allshifted = true;
-	for(int index = 0; index < arr1.size(); index++) {
-		if(arr1[(index+n) % arr1.size()] != arr2[index]) {
+	for (int index = 0; index < arr1.size(); index++) {
+		if (arr1[(index + n) % arr1.size()] != arr2[index]) {
 			allshifted = false;
 			break;
 		}
@@ -45,7 +46,7 @@ vector<int> quicksort(std::vector<int> arr) {
 	}
 	int pivot = arr[arr.size() / 2];
 	std::vector<int> smallerelements = {}, equalelements = {}, greaterelements = {};
-	for(int index = 0; index < arr.size(); index++) {
+	for (int index = 0; index < arr.size(); index++) {
 		if (arr[index] < pivot) {
 			smallerelements.push_back(arr[index]);
 		}
@@ -75,11 +76,29 @@ bool cons(std::vector<int> arr) {
 	return true;
 }
 
+
+bool isDisarium(int number) {
+	std::string charNum = std::to_string(number);
+	int sum{ 0 };
+	for (int index = 0; index < charNum.length() ; index++) {
+		int num = charNum[index] - '0';
+		sum += pow(num, index+1);
+	}
+	if (sum == number) { return true; }
+	return false;
+}
+
+
+
 int main()
 {
-//	tweakLetters("apple", { 0, 1, -1, 0, -1 });
-//	circularShift({1, 2, 3, 4}, {3, 4, 1, 2}, 2);
-//	quicksort({5, 2, 8, 1, 9});
-	cons({5, 1, 4, 3, 2});
+	//	tweakLetters("apple", { 0, 1, -1, 0, -1 });
+	//	circularShift({1, 2, 3, 4}, {3, 4, 1, 2}, 2);
+	//	quicksort({5, 2, 8, 1, 9});
+	//cons({ 5, 1, 4, 3, 2 });
+	isDisarium(75);
+	isDisarium(135);
+
+
 	return 0;
 }
