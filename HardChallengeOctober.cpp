@@ -1,5 +1,5 @@
 // Middle cpp Projects.cpp : Este archivo contiene la función "main". La ejecución del programa comienza y termina ahí.
-//
+// HardChallengeOctober
 
 #include <algorithm>
 #include <cmath>
@@ -150,6 +150,26 @@ std::string mysteryFunc(std::string s) {
 	return output;
 }
 
+#include <map>
+std::map<std::string, std::string> parseCode(const std::string& code) { 
+	std::map<std::string, std::string> output = {};
+	std::string firstName = code.substr( 0, code.find('0')), lastName = "",
+		id = code.substr(code.rfind('0') + 1, code.size() - code.find("0"));
+
+	for (int index = code.find('0') ; index < code.rfind('0'); index++) {
+		if (code[index] != '0') {
+			lastName += code[index];
+		}
+	}
+	output.insert({
+		{ "firstName", firstName },
+		{ "lastName",lastName },
+		{ "id",id }
+		});
+	return output; 
+}
+
+
 int main()
 {
 	//	tweakLetters("apple", { 0, 1, -1, 0, -1 });
@@ -161,7 +181,8 @@ int main()
 	//  makeBox(5);
 	//  cout << std::string::npos << endl;
 	//	firstBeforeSecond("a rabbit jumps joyfully", "a", "j");
-	mysteryFunc("A4B5C2");
+	//	mysteryFunc("A4B5C2");
+	parseCode("John000Doe000123");
 
 	return 0;
 }
