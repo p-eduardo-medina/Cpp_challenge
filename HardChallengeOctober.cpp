@@ -207,14 +207,6 @@ double getTotalPrice(const std::vector<Grocery>& groceries) {
 	return sum;
 }
 
-int sumPrimes(std::vector<int> arr) {
-	int sum = 0;
-	for (int num : arr) {
-		if (isprime(num)) { sum += num; }
-	}
-	return sum;
-}
-
 bool isprime(int num) {
 	if (num == 1) { return false; }
 	for (int i = 2;i < static_cast<int>(std::sqrt(num) + 1); i++) {
@@ -224,7 +216,31 @@ bool isprime(int num) {
 	}
 	return true;
 }
+int sumPrimes(std::vector<int> arr) {
+	int sum = 0;
+	for (int num : arr) {
+		if (isprime(num)) { sum += num; }
+	}
+	return sum;
+}
 
+
+bool booleanAnd(const std::vector<bool>& values) {
+	bool flag = true;
+	for (bool value : values) {flag = flag and value;}
+	return flag;
+}
+bool booleanOr(const std::vector<bool>& values) { 
+	bool flag = true;
+	for (bool value : values) { flag = flag or value; }
+	return flag;
+}
+bool booleanXor(const std::vector<bool>& values) { 
+	bool flag = values[0];
+	std::vector<bool> subvector(values.begin() + 1, values.end());
+	for (bool value : subvector) { flag = flag == value; }
+	return not flag; 
+}
 
 int main()
 {
@@ -242,8 +258,8 @@ int main()
 	//	cout <<canBuild("got 2 go", "gogogo 2 today") << endl;
 	//	overTwentyOne2({"2", "8", "J"});
 	//	getTotalPrice({ { "Chocolate", 1, 0.1 },{ "Lollipop", 1, 0.2 } });
-	isprime(4);
-
+	//	isprime(4);
+	booleanXor({ true,true,false,true });
 
 	return 0;
 }
