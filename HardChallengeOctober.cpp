@@ -169,6 +169,7 @@ std::map<std::string, std::string> parseCode(const std::string& code) {
 	return output; 
 }
 
+
 bool canBuild(std::string str1, std::string str2) {
 	for (char c : str2) {
 		if (str1.find(c) == std::string::npos) {
@@ -206,6 +207,23 @@ double getTotalPrice(const std::vector<Grocery>& groceries) {
 	return sum;
 }
 
+int sumPrimes(std::vector<int> arr) {
+	int sum = 0;
+	for (int num : arr) {
+		if (isprime(num)) { sum += num; }
+	}
+	return sum;
+}
+
+bool isprime(int num) {
+	if (num == 1) { return false; }
+	for (int i = 2;i < static_cast<int>(std::sqrt(num) + 1); i++) {
+		if (num % i == 0) {
+			return false;
+		}
+	}
+	return true;
+}
 
 
 int main()
@@ -223,7 +241,8 @@ int main()
 	//	parseCode("John000Doe000123");
 	//	cout <<canBuild("got 2 go", "gogogo 2 today") << endl;
 	//	overTwentyOne2({"2", "8", "J"});
-	getTotalPrice({ { "Chocolate", 1, 0.1 },{ "Lollipop", 1, 0.2 } });
+	//	getTotalPrice({ { "Chocolate", 1, 0.1 },{ "Lollipop", 1, 0.2 } });
+	isprime(4);
 
 
 	return 0;
