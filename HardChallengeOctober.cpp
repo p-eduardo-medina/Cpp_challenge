@@ -169,6 +169,44 @@ std::map<std::string, std::string> parseCode(const std::string& code) {
 	return output; 
 }
 
+bool canBuild(std::string str1, std::string str2) {
+	for (char c : str2) {
+		if (str1.find(c) == std::string::npos) {
+			return false;
+		}
+	}
+	return true;
+}
+#include <string>
+bool overTwentyOne(std::vector<char> cards) {
+	int sum = 0;
+	for (char card : cards) {
+		if (card >= '0' && card <= '9') { sum += card - '0'; }
+		else if (card == 'A') { sum += 1; }
+		else sum += 10;
+	}
+	return sum >= 21;
+}
+bool overTwentyOne2(std::vector<char> cards) {
+	int v = 0;
+	for (char c : cards)
+		v += (isdigit(c) ? (c - '0') : 0) + (c == 'J' || c == 'K' || c == 'Q') * 10 + (c == 'A');
+	return v > 21;
+}
+
+struct Grocery {
+	std::string product;
+	int quantity;
+	double price;
+};
+
+double getTotalPrice(const std::vector<Grocery>& groceries) {
+	double sum = 0.0;
+	for (const auto& Grocery : groceries) {	sum += (Grocery.price) * (Grocery.quantity);}
+	return sum;
+}
+
+
 
 int main()
 {
@@ -182,7 +220,11 @@ int main()
 	//  cout << std::string::npos << endl;
 	//	firstBeforeSecond("a rabbit jumps joyfully", "a", "j");
 	//	mysteryFunc("A4B5C2");
-	parseCode("John000Doe000123");
+	//	parseCode("John000Doe000123");
+	//	cout <<canBuild("got 2 go", "gogogo 2 today") << endl;
+	//	overTwentyOne2({"2", "8", "J"});
+	getTotalPrice({ { "Chocolate", 1, 0.1 },{ "Lollipop", 1, 0.2 } });
+
 
 	return 0;
 }
