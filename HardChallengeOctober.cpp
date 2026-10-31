@@ -301,6 +301,13 @@ bool isIcecreamSandwich(std::string str) {
 	return true;
 }
 
+int primeNumbers(int num) {
+	if (num < 2)  return 0; 
+	int count{ 0 };
+	for (int index = 2; index <= num;index++) if (isprime(index)) count += 1;
+	return count;
+}
+
 
 int main()
 {
@@ -324,6 +331,6 @@ int main()
 	//	invert("dLROW YM sI HsEt"); // ➞ "TeSh iS my worlD"
 	//	constructDeconstruct("Hello");
 	//	isIcecreamSandwich("CDC");
-
+	primeNumbers(10);
 	return 0;
 }
