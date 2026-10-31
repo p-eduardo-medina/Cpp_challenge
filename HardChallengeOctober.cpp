@@ -242,6 +242,56 @@ bool booleanXor(const std::vector<bool>& values) {
 	return not flag; 
 }
 
+int countSmileys(std::vector<std::string> arr) {
+	const std::vector<char> eyes = { ':',';' }, nose = { '-','~' }, mouth = { ')','D' };
+	int count = 0;
+	for (const auto& face : arr) {
+		if ((face.size() == 2 || face.size() == 3) &&
+			std::find(eyes.begin(), eyes.end(), face[0]) != eyes.end() &&
+			std::find(mouth.begin(), mouth.end(), face.back()) != mouth.end() &&
+			(face.size() == 2 ||
+				std::find(nose.begin(), nose.end(), face[1]) != nose.end())) {
+			++count;
+		}
+	}
+	return count;
+}
+
+std::string invert2(const std::string& text) {
+	std::string output = "";
+	for (int index = 1;index <= text.size(); index++) {
+		char co{};
+		if (std::islower(text[text.size() - index])) {
+			co = std::toupper(text[text.size() - index]);
+		}
+		else {
+			co = std::tolower(text[text.size() - index]);
+		}
+		output +=co;
+	}
+	return output;
+}
+
+std::string invert(const std::string& str)
+{
+	std::string result(str);
+	std::reverse(std::begin(result), std::end(result));
+	for (char& c : result) {
+		c = isupper(c) ? tolower(c) : toupper(c);
+	}
+	return result;
+}
+
+std::vector<std::string> constructDeconstruct(std::string str) {
+	std::vector<string> output = {};
+	for (int index = 1; index < 2*(str.size()); index++) {
+		int i = (index < str.size()) ? index : 2 * (str.size()) - index;
+		output.push_back(str.substr(0, i));
+	}
+	return output;
+}
+
+
 int main()
 {
 	//	tweakLetters("apple", { 0, 1, -1, 0, -1 });
@@ -259,7 +309,11 @@ int main()
 	//	overTwentyOne2({"2", "8", "J"});
 	//	getTotalPrice({ { "Chocolate", 1, 0.1 },{ "Lollipop", 1, 0.2 } });
 	//	isprime(4);
-	booleanXor({ true,true,false,true });
+	//	booleanXor({ true,true,false,true });
+	//	cout << countSmileys({ ";D", ":-(", ":-)", ";~)" }) << endl
+	//	invert("dLROW YM sI HsEt"); // ➞ "TeSh iS my worlD"
+	//	constructDeconstruct("Hello");
+
 
 	return 0;
 }
