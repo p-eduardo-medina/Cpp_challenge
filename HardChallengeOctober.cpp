@@ -291,6 +291,16 @@ std::vector<std::string> constructDeconstruct(std::string str) {
 	return output;
 }
 
+bool isIcecreamSandwich(std::string str) {
+	int mid_index = str.length() / 2;
+	if (str.size() < 3 || str[0]== str[mid_index] ) { return false; }
+	for (int index = 0; index <= mid_index; index++) {
+		if (str[index] != str[str.size() - index - 1] ||
+			!(str[index] == str[0] || str[index] == str[mid_index])) { return false; }
+	}
+	return true;
+}
+
 
 int main()
 {
@@ -313,7 +323,7 @@ int main()
 	//	cout << countSmileys({ ";D", ":-(", ":-)", ";~)" }) << endl
 	//	invert("dLROW YM sI HsEt"); // ➞ "TeSh iS my worlD"
 	//	constructDeconstruct("Hello");
-
+	//	isIcecreamSandwich("CDC");
 
 	return 0;
 }
