@@ -28,6 +28,33 @@ bool isMiniSudoku(std::vector<std::vector<int>> square) {
 	}
 	return true;
 }
+std::string toSnakeCase(std::string str) {
+	std::string output{};
+	for (char c : str) {
+		if (isupper(c)) {
+			if (!output.empty()) {
+				output += '_';
+				output += tolower(c);
+			}
+			else output += tolower(c);
+		}
+		else output += c;
+	}
+	return output;
+}
+
+std::string toCamelCase(std::string str) {
+	std::string output{};
+	for (int index = 0; index < str.length(); index++) {
+		if (str[index] == '_') {
+			output += toupper(str[index + 1]);
+			index++;
+		}
+		else output += str[index];
+	}
+	return output;
+}
+
 
 
 int main()
@@ -38,4 +65,6 @@ int main()
 	//	{ 3, 3, 3 }
 	//	});
 	//	isMiniSudoku([[1, 3, 2], [9, 7, 8], [4, 5, 6]] );
+	toSnakeCase("helloEdabit");
+	toCamelCase("is_modal_open");
 }
