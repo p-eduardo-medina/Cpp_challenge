@@ -61,6 +61,27 @@ int sharedLetters(std::string str1, std::string str2) {
 	return output.length();
 }
 
+int bugger(int num) {
+	if (num < 9) return 0;
+	else {
+		int numAux = 1;
+		while (num > 0) {
+			numAux *= (num % 10);
+			num = num / 10;
+		}
+		return 1 + bugger(numAux);
+	}
+}
+
+
+std::string freeThrows(std::string success, int rows) {
+	std::string probabilitie = success.substr(0, success.length()-1);
+	int prob = std::stoi(probabilitie);
+	double result{1};
+	for (int i = 1; i <= rows; i++) result *= (0.01*prob);
+	return std::to_string(static_cast<int>(std::round(result * 100))) + "%";
+}
+
 int main()
 {
 	//	transposeMatrix({
@@ -71,4 +92,6 @@ int main()
 	//	isMiniSudoku([[1, 3, 2], [9, 7, 8], [4, 5, 6]] );
 	//	toSnakeCase("helloEdabit");
 	//	sharedLetters("apple", "meaty");
+	//	bugger(999);
+	freeThrows("75%", 5);
 }
