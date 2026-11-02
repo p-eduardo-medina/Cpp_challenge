@@ -82,6 +82,16 @@ std::string freeThrows(std::string success, int rows) {
 	return std::to_string(static_cast<int>(std::round(result * 100))) + "%";
 }
 
+std::vector<int> profit(int A, int B) {
+	int count1 = 0, count2 = 0;
+	for (int index = 0; index <= 100; index++) {
+		if (std::abs(index - A) < std::abs(index - B)) count1++;
+		else if (std::abs(index - A) > std::abs(index - B)) count2++;
+	}
+	return { count1, count2 };
+}
+
+
 int main()
 {
 	//	transposeMatrix({
@@ -93,5 +103,5 @@ int main()
 	//	toSnakeCase("helloEdabit");
 	//	sharedLetters("apple", "meaty");
 	//	bugger(999);
-	freeThrows("75%", 5);
-}
+	//	freeThrows("75%", 5);
+	//	profit(32, 69);
