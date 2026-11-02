@@ -55,7 +55,11 @@ std::string toCamelCase(std::string str) {
 	return output;
 }
 
-
+int sharedLetters(std::string str1, std::string str2) {
+	std::string output{};
+	for (char c : str1) if (str2.find(c) != std::string::npos && output.find(c) == std::string::npos) output += c;
+	return output.length();
+}
 
 int main()
 {
@@ -65,6 +69,6 @@ int main()
 	//	{ 3, 3, 3 }
 	//	});
 	//	isMiniSudoku([[1, 3, 2], [9, 7, 8], [4, 5, 6]] );
-	toSnakeCase("helloEdabit");
-	toCamelCase("is_modal_open");
+	//	toSnakeCase("helloEdabit");
+	//	sharedLetters("apple", "meaty");
 }
