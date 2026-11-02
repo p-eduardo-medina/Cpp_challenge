@@ -90,7 +90,45 @@ std::vector<int> profit(int A, int B) {
 	}
 	return { count1, count2 };
 }
+#include <numeric>
+bool isShapePossible(int n, std::vector<int> angles) {
+	if (n < 2) return false;
+	for(int angle : angles) if (angle <= 0 || angle >= 180) return false;
+	int sum = std::accumulate(angles.begin(), angles.end(), 0);
+	if (sum != (n - 2) * 180) return false;
+	return true;
+}
 
+std::vector<int> sortArr(std::vector<int> arr) {
+	if(arr.size()<=1) return arr;
+	int pivot = arr[arr.size() / 2];
+	std::vector<int> smaller{}, equal{}, bigger{};
+	for (int i = 0; i < arr.size(); i++) {
+		if (arr[i] < pivot) smaller.push_back(arr[i]);
+		else if (arr[i] == pivot) equal.push_back(arr[i]);
+		else bigger.push_back(arr[i]);
+	}
+	smaller = sortArr(smaller);
+	bigger = sortArr(bigger);
+	std::vector<int> result;
+	for (const auto* part : { &smaller, &equal, &bigger })result.insert(result.end(), part->begin(), part->end());
+	return result;
+}
+std::vector<int> oddSort(std::vector<int> arr) {
+	std::vector<int> odds{}, output{};
+	for (int i = 0; i < arr.size(); i++) {
+		if (arr[i] % 2 == 1) odds.push_back(arr[i]);
+	}
+	odds = sortArr(odds);
+	for (int i = 0; i < arr.size();i++) {
+		if (arr[i]%2==0)output.push_back(arr[i]);
+		else {
+			output.push_back(odds[0]);
+			odds.erase(odds.begin());
+		}
+	}
+	return output;
+}
 
 int main()
 {
@@ -105,3 +143,5 @@ int main()
 	//	bugger(999);
 	//	freeThrows("75%", 5);
 	//	profit(32, 69);
+	oddSort({7, 5, 2, 3, 1});
+}
