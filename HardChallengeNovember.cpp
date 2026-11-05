@@ -147,6 +147,41 @@ bool winRound(std::vector<int> you, std::vector<int> opp) {
 	std::sort(opp.begin(), opp.end());
 	return (10 * you[you.size()-1] + you[you.size() - 2]) > (10 * opp[opp.size()-1] + opp[opp.size() - 2]);
 }
+std::string reverse(std::string str) {
+	std::vector<int> indices{};
+	std::vector<char> letters{};
+	std::string result{};
+	for (int index = 0; index < str.size(); index++) {
+		if (str[index] >= '0' && str[index] <= '9') indices.push_back(index);
+		else letters.push_back(str[index]);
+	}
+	std::reverse(letters.begin(), letters.end());;
+	for (int index = 0; index < str.size();index++) {
+		if (std::find(indices.begin(), indices.end(), index) != indices.end()) result += str[index];
+		else {
+			result += letters[0];
+			letters.erase(letters.begin());
+		}
+	}
+	return result;
+}
+std::vector<char> currentlyWinning(std::vector<int> scores) {
+	std::vector<int> O{scores[1]}, Y{scores[0]};
+	std::vector<char> Result{};
+	for (int index = 2; index < scores.size();index++) {
+		scores[index] = scores[index] + scores[index - 2];
+		if (index % 2 != 0)	O.push_back(scores[index]);
+		
+		else Y.push_back(scores[index]);
+	}
+	for (int index = 0; index < O.size(); index++) {
+		if (O[index] > Y[index]) Result.push_back('O');
+		else if (O[index] < Y[index]) Result.push_back('Y');
+		else Result.push_back('T');
+	}
+	return Result;
+}
+
 
 int main()
 {
@@ -163,5 +198,10 @@ int main()
 	//	profit(32, 69);
 	//	oddSort({7, 5, 2, 3, 1});
 	//	standardDeviation({3, 5, 7});
-	winRound({2, 5, 2, 6, 9}, { 3, 7, 3, 1, 2 });
-}
+	//	winRound({2, 5, 2, 6, 9}, { 3, 7, 3, 1, 2 });
+	//	cout << reverse("ab89c") << " cb89a"<<endl;
+	currentlyWinning({ 5, 15, 17, 35, 16, 40, 66, 12, 10, 9 });
+	//currentlyWinning([5, 1, 2, 10]);
+	//currentlyWinning([10, 10, 5, 5, 2, 2, 1, 3, 100, 5]);
+
+ }
