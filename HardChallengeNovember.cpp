@@ -130,6 +130,24 @@ std::vector<int> oddSort(std::vector<int> arr) {
 	return output;
 }
 
+float standardDeviation(std::vector<int> arr) {
+	float mean{}, sum{}, sigma{};
+	for (int x : arr) {
+		mean += x;
+	} mean /= arr.size();
+	
+	for (int x : arr) {
+		sum += pow((mean - x), 2);
+	}sum /= arr.size();
+	return std::round(std::sqrt(sum) * 100.0) / 100.0;
+}
+//#include <algorithm>
+bool winRound(std::vector<int> you, std::vector<int> opp) {
+	std::sort(you.begin(), you.end());
+	std::sort(opp.begin(), opp.end());
+	return (10 * you[you.size()-1] + you[you.size() - 2]) > (10 * opp[opp.size()-1] + opp[opp.size() - 2]);
+}
+
 int main()
 {
 	//	transposeMatrix({
@@ -143,5 +161,7 @@ int main()
 	//	bugger(999);
 	//	freeThrows("75%", 5);
 	//	profit(32, 69);
-	oddSort({7, 5, 2, 3, 1});
+	//	oddSort({7, 5, 2, 3, 1});
+	//	standardDeviation({3, 5, 7});
+	winRound({2, 5, 2, 6, 9}, { 3, 7, 3, 1, 2 });
 }
