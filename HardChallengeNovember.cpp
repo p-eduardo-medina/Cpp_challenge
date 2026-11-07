@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string> 
+#include <numeric>
 #include <vector>
 
 using namespace std;
@@ -90,7 +91,6 @@ std::vector<int> profit(int A, int B) {
 	}
 	return { count1, count2 };
 }
-#include <numeric>
 bool isShapePossible(int n, std::vector<int> angles) {
 	if (n < 2) return false;
 	for(int angle : angles) if (angle <= 0 || angle >= 180) return false;
@@ -181,6 +181,32 @@ std::vector<char> currentlyWinning(std::vector<int> scores) {
 	}
 	return Result;
 }
+int positiveSum(std::string chars) {
+	std::string digits{ "-1234567890" }, num{};
+	std::vector<int> integers{};
+	for (int index = 0; index < chars.length(); index++) {
+		if ((chars[index] >= '0' && chars[index] <= '9') || chars[index] == '-') num += chars[index];
+		else if (num != "") {
+			if (std::stoi(num) > 0 || index == chars.length()) integers.push_back(std::stoi(num));
+			num = "";
+		}
+	}
+	if (num != "" && std::stoi(num) > 0) integers.push_back(std::stoi(num));
+	return std::accumulate(integers.begin(), integers.end(), 0);
+}
+
+string separateNumbers(const string& s) {
+	if (s[0] == '0') return "NO";
+	for (int index = 1; index < s.size() / 2 ;index++) {
+		int courrent = stoi(s.substr(0, index));
+		string news{};
+		while (news.size() < s.size()) {
+			news += to_string(courrent++);
+		}
+		if (news == s) return "YES " + s.substr(0, index);
+	}
+	return "NO";
+}
 
 
 int main()
@@ -200,8 +226,14 @@ int main()
 	//	standardDeviation({3, 5, 7});
 	//	winRound({2, 5, 2, 6, 9}, { 3, 7, 3, 1, 2 });
 	//	cout << reverse("ab89c") << " cb89a"<<endl;
-	currentlyWinning({ 5, 15, 17, 35, 16, 40, 66, 12, 10, 9 });
-	//currentlyWinning([5, 1, 2, 10]);
-	//currentlyWinning([10, 10, 5, 5, 2, 2, 1, 3, 100, 5]);
-
+	//	currentlyWinning({ 5, 15, 17, 35, 16, 40, 66, 12, 10, 9 });
+	//	currentlyWinning([5, 1, 2, 10]);
+	//	currentlyWinning([10, 10, 5, 5, 2, 2, 1, 3, 100, 5]);
+	//	positiveSum("-12#-33 13%14&-11");
+ 	cout << separateNumbers("1234")  << endl;
+	cout << separateNumbers("91011") << endl;
+	cout << separateNumbers("99100") << endl;
+	cout << separateNumbers("101103")<< endl;
+	cout << separateNumbers("010203")<< endl;
+	cout << separateNumbers("00000000000000000013") << endl;
  }
