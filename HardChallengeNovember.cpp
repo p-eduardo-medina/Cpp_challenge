@@ -207,7 +207,85 @@ string separateNumbers(const string& s) {
 	}
 	return "NO";
 }
+#include <cctype>
+std::string caesarCipher(std::string s, int k) {
+	std::string alphabet = "abcdefghijklmnopqrstuvwxyz",output;
+	for (int index = 0; index < s.size(); index++) {
+		char c = s[index];
+		if (alphabet.find(static_cast<char>(std::tolower(static_cast<unsigned char>(c)))) != std::string::npos) {
+			if (std::isupper(static_cast<unsigned char>(c))) {
+				c = static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
+				int ind = (alphabet.find(c) + k) % alphabet.size();
+				output += static_cast<char>(std::toupper(static_cast<unsigned char>(alphabet[ind])));
+			}
+			else {
+				int ind = (alphabet.find(c) + k) % alphabet.size();
+				output += alphabet[ind];
+			}
+		}
+		else output += c;
+	}
+	return output;
+}
 
+std::string caesarCipher2(std::string s, int k) {
+	for (char& c : s) {
+		if (c >= 'A' && c <= 'Z') {
+			c = (c - 'A' + k) % 26 + 'A';
+		}
+		else if (c >= 'a' && c <= 'z') {
+			c = (c - 'a' + k) % 26 + 'a';
+		}
+	}
+	return s;
+}
+
+
+std::vector<int> factorSort(std::vector<int> numbers) { 
+	std::vector< std::vector<int> > array = {};
+	for (int number : numbers) {
+		int count = 0;
+		for (int fact = 1; fact <= number; fact++) if (number % fact == 0) count++;
+		array.push_back({count,number});
+	}
+	std::sort(array.rbegin(), array.rend());
+	std::vector<int> secondPositions;
+	for (const auto& row : array) secondPositions.push_back(row[1]);
+	
+	return secondPositions;
+}
+
+#include <vector>
+std::vector<std::vector<int>> helpBobby(int size) { 
+	std::vector<std::vector<int>>m(size, std::vector<int>(size));
+	for (int i = 0;i < size;++i) { 
+		m[i][i] = 1;
+		m[i][size - 1 - i] = 1; 
+	}
+	return m; 
+}
+
+#include <map>
+struct Student {
+	std::string name;
+	std::vector<int>notes;
+};
+std::map<int, int> getNotesDistribution(const std::vector<Student>& students) {
+	std::vector<int> validNotes;
+	for (const auto& student : students) {
+		std::copy_if(student.notes.begin(), student.notes.end(),
+			std::back_inserter(validNotes),
+			[](int note) { return note >= 1 && note <= 5; }); //Función Lambda  [](int note)
+	}
+
+	return std::accumulate(
+		validNotes.begin(), validNotes.end(),
+		std::map<int, int>{}, //Valor antes de iniciar
+		[](std::map<int, int> distribution, int note) {
+			++distribution[note];
+			return distribution;
+		});
+}
 
 int main()
 {
@@ -230,10 +308,23 @@ int main()
 	//	currentlyWinning([5, 1, 2, 10]);
 	//	currentlyWinning([10, 10, 5, 5, 2, 2, 1, 3, 100, 5]);
 	//	positiveSum("-12#-33 13%14&-11");
- 	cout << separateNumbers("1234")  << endl;
-	cout << separateNumbers("91011") << endl;
-	cout << separateNumbers("99100") << endl;
-	cout << separateNumbers("101103")<< endl;
-	cout << separateNumbers("010203")<< endl;
-	cout << separateNumbers("00000000000000000013") << endl;
+ 	//	cout << separateNumbers("1234")  << endl;
+	//	caesarCipher("middle-Outz", 2);
+	//	factorSort({ 1, 2, 31, 4 }); // { 4, 31, 2, 1 }
+	//	helpBobby(3);
+	//std::vector<Student> students{
+	//	{ "Steve",{ 5, 5, 3, -1, 6 } },
+	//	{ "John",{ 3, 2, 5, 0, -3 } }
+	//};
+	// getNotesDistribution(students);
+	int count = 0;
+	auto esPar = [&count](int n)->bool {
+	auto esPar = [&count](int n)->bool {
+			if (n % 2 == 0) {
+				count++;
+				return n % 2;
+			}
+		};
+
+	bool esParo = esPar(4);
  }
